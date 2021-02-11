@@ -178,6 +178,8 @@ UniValue spv_createanchor(const JSONRPCRequest& request)
         },
     }.Check(request);
 
+    if (!spv::pspv)
+        throw JSONRPCError(RPC_INVALID_REQUEST, "spv module disabled");
 
     if (pwallet->chain().isInitialBlockDownload()) {
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cannot create anchor while still in Initial Block Download");
