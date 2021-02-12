@@ -843,8 +843,12 @@ void CFakeSpvWrapper::OnSendRawTx(BRTransaction *tx, std::promise<int> * promise
 
     /// @todo lock cs_main? or assert unlocked?
     LogPrintf("fakespv: adding anchor tx %s\n", to_uint256(tx->txHash).ToString());
+
+    // Use realistic time
+    tx->timestamp = GetTime();
+
     OnTxAdded(tx);
-    OnTxUpdated(&tx->txHash, 1, lastBlockHeight, 666);
+    OnTxUpdated(&tx->txHash, 1, lastBlockHeight, GetTime() + 1000);
 
     if (promise)
         promise->set_value(0);
