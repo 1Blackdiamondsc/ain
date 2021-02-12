@@ -10,7 +10,6 @@ from test_framework.test_framework import DefiTestFramework
 from test_framework.util import assert_equal, connect_nodes, disconnect_nodes
 
 from decimal import Decimal
-import time
 
 class CommunityBalanceReorg(DefiTestFramework):
     def set_test_params(self):
